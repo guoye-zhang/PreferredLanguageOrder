@@ -1,0 +1,8 @@
+Package: com.ccdog.preferredlanguageorder
+Name: PreferredLanguageOrder
+Depends: firmware (>= 7.0), mobilesubstrate
+Version: 1.0
+Architecture: iphoneos-arm
+Description: Adjust preferred language order in Preferences.app.
+Author: CC-Dog <cc941201@gmail.com>
+Section: Tweaks
