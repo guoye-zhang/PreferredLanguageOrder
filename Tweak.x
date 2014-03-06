@@ -12,7 +12,10 @@ NSMutableDictionary *preferences;
 
 - (void)viewWillAppear:(BOOL)animated {
     %orig(animated);
-    self.view.editing = YES;
+    if ([self.view respondsToSelector:@selector(setEditing:)])
+        self.view.editing = YES;
+    else
+        ((UITableView *)self.view.subviews[0]).editing = YES;
     NSInteger numItems = [self tableView:self.view numberOfRowsInSection:0];
     cellOrder = [NSMutableArray arrayWithCapacity:numItems];
     for (NSInteger i = 0 ; i < numItems ; i ++)
