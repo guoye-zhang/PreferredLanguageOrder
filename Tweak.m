@@ -7,11 +7,8 @@ NSMutableDictionary *preferences;
 
 - (void)viewWillAppear:(BOOL)animated {
     %orig(animated);
-    if ([self.view respondsToSelector:@selector(setEditing:)])
-        self.view.editing = YES;
-    else
-        ((UITableView *)self.view.subviews[0]).editing = YES;
-    NSInteger numItems = [self tableView:self.view numberOfRowsInSection:0];
+    self.table.editing = YES;
+    NSInteger numItems = [self tableView:self.table numberOfRowsInSection:0];
     cellOrder = [NSMutableArray arrayWithCapacity:numItems];
     for (NSInteger i = 0 ; i < numItems ; i ++)
         [cellOrder addObject:@(i)];
@@ -65,7 +62,7 @@ NSMutableDictionary *preferences;
             [preferences writeToFile:@"/var/mobile/Library/Preferences/.GlobalPreferences.plist" atomically:YES];
             system("killall -HUP SpringBoard");
         } else
-            [self tableView:self.view didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:[cellOrder[0] integerValue] inSection:0]];
+            [self tableView:self.table didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:[cellOrder[0] integerValue] inSection:0]];
     }
     %orig;
     cellOrder = nil;
